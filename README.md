@@ -1,5 +1,7 @@
 # Ansible Collection - tchecode.libvirt
 
+[![wakatime](https://wakatime.com/badge/github/lucaslehnen/tchecode.libvirt.svg)](https://wakatime.com/badge/github/lucaslehnen/tchecode.libvirt)
+
 It's an Ansible collection with roles to install libvirt and Qemu.
 
 ** For now, tested only by  amd64 hosts running Debian.
