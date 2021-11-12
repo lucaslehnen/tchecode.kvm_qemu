@@ -1,0 +1,4 @@
+---
+# tasks file for reset
+- include: network.yml
+- include: packages.yml

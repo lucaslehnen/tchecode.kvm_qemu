@@ -1,0 +1,19 @@
+namespace: tchecode
+name: libvirt
+version: 0.1.0
+readme: README.md
+authors:
+  - Lucas Lehnen <lucaslehnen@outlook.com>
+description: Ansible Collection to install libvirt/qemu
+license:
+  - MIT
+license_file: ''
+tags:
+  - libvirt
+  - qemu
+dependencies: {}
+repository: https://github.com/lucaslehnen/tchecode.libvirt
+documentation: https://github.com/lucaslehnen/tchecode.libvirt
+homepage: https://github.com/lucaslehnen/tchecode.libvirt
+issues: https://github.com/lucaslehnen/tchecode.libvirt/issues
+build_ignore: []
