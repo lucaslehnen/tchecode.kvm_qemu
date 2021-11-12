@@ -6,4 +6,15 @@ This role install libvirt and Qemu, configure a bridge network on your system an
 Configure the variables
 -----------------------
 
-- There's no variables
+`bridge_network`: The name of the virtual network device that will be created.
+
+```yaml
+- hosts: all
+  user: ubuntu
+  become: true
+  gather_facts: false
+  roles:
+    - tchecode.libvirt.install
+  vars:
+    - bridge_network: "br0"
+```
