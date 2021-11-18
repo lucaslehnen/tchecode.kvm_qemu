@@ -1,11 +1,6 @@
 - name: "Uninstall libvirt packages"
   apt:
-    name: "{{ packages }}"
-    state: absent
-    purge: true
-    autoclean: true
-  vars:
-    packages:
+    pkg: 
       - libvirt-daemon
       - qemu-kvm
       - bridge-utils
@@ -15,6 +10,9 @@
       - libosinfo-bin
       - qemu-system
       - virt-manager 
+    state: absent
+    purge: true
+    autoclean: true
 
 - name: "Disable 'vhost_net' kernel module"
   lineinfile:

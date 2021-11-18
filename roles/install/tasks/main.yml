@@ -2,8 +2,7 @@
 # tasks file for install
 - name: "Gathering facts"
   setup:
-    filter:
-      - 'ansible_default_ipv4'            
+    filter: "ansible_default_ipv4"
 - include: install.yml
 - include: storage.yml
 - include: network.yml

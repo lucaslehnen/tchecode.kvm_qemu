@@ -1,18 +1,17 @@
 - name: "Install libvirt packages"
   apt:
-    name: "{{ item }}"
+    pkg: 
+      - libvirt-daemon
+      - qemu-kvm
+      - bridge-utils
+      - virtinst
+      - libvirt-daemon-system
+      - libguestfs-tools
+      - libosinfo-bin
+      - qemu-system
+      - virt-manager  
     update_cache: true
-    state: present  
-  with_items:
-    - libvirt-daemon
-    - qemu-kvm
-    - bridge-utils
-    - virtinst
-    - libvirt-daemon-system
-    - libguestfs-tools
-    - libosinfo-bin
-    - qemu-system
-    - virt-manager     
+    state: present
 
 - name: "Loading vhost_net kernel module"
   lineinfile:

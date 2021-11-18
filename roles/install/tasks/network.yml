@@ -16,6 +16,12 @@
   vars:
     physical_interface: "{{ physical_interface_cmd.stdout }}"
 
+- name: "Creating a folder /etc/qemu/"
+  file: 
+    state: directory
+    mode: 0640
+    path: "/etc/qemu/"
+
 - name: "Configuring a bridge for QEmu"
   template:    
     src: "bridge.conf.j2"
