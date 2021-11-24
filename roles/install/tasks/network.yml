@@ -1,6 +1,6 @@
-- name: "list physical interfaces"
+- name: "Find the active network interface..."
   shell: 
-    cmd: find /sys/class/net -type l -execdir basename '{}' ';' | grep -v '^\(lo\|{{ bridge_network }}\)'
+    cmd: "/sbin/ip -4 -o a | cut -d ' ' -f 2,7 | grep -Po '.*(?= {{ ansible_default_ipv4.address }})'"
   register: physical_interface_cmd
   changed_when: false
 
@@ -13,6 +13,7 @@
     mode: '0440'
     backup: yes
   notify: reboot
+  when: physical_interface_cmd.stdout != 'br0'
   vars:
     physical_interface: "{{ physical_interface_cmd.stdout }}"
 
