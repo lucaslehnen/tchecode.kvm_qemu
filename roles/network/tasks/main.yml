@@ -1,0 +1,16 @@
+---
+- name: "Gathering facts"
+  setup:
+    filter: "ansible_default_ipv4"
+
+- include: bridge_adapter.yml
+
+- name: "Removing the default network"
+  include_tasks: remove_network.yml
+  vars:
+    network_to_remove: 'default'
+
+- name: "Creating the virtual network adapters"
+  include_tasks: config.yml
+  with_items: "{{ kvm_qemu.networks }}"
+

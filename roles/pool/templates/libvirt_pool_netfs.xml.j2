@@ -1,0 +1,16 @@
+<pool type='netfs' xmlns:fs='http://libvirt.org/schemas/storagepool/fs/1.0'>
+  <source>
+    <host name='{{ item.hostname }}'/>
+    <format type='{{ item.format }}'/>    
+    <dir path='{{ item.path }}'/>
+  </source>
+  <name>{{ item.name }}</name>  
+  <target>
+    <path>{{ item.mount_path }}</path>
+  </target>
+  <fs:mount_opts>
+    {% for option in item.options %}
+    <fs:option name='{{ option }}'/>
+    {% endfor %}
+  </fs:mount_opts>
+</pool>

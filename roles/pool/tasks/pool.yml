@@ -1,0 +1,17 @@
+- name: "Check if pool exists "
+  shell:
+    cmd: 'virsh pool-list --all | grep "{{ item.name }}"'
+  failed_when: "check_pool.rc == 2"
+  changed_when: false
+  register: check_pool
+
+- name: "Creating the pool"
+  command:
+    cmd: 'virsh pool-define-as {{ item.name }} dir - - - - {{ item.path }}'
+  when: check_pool.stdout.find(item.name) < 0
+
+- name: "Initializing the default pool"
+  command:
+    cmd: 'virsh pool-start default'
+  when: check_pool_default.stdout.find('inativo') >= 0
+  failed_when: false

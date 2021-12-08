@@ -1,5 +1,5 @@
 namespace: tchecode
-name: libvirt
+name: kvm_qemu
 version: 0.1.0
 readme: README.md
 authors:
@@ -10,10 +10,11 @@ license:
 license_file: ''
 tags:
   - libvirt
+  - kvm
   - qemu
 dependencies: {}
-repository: https://github.com/lucaslehnen/tchecode.libvirt
-documentation: https://github.com/lucaslehnen/tchecode.libvirt
-homepage: https://github.com/lucaslehnen/tchecode.libvirt
-issues: https://github.com/lucaslehnen/tchecode.libvirt/issues
+repository: https://github.com/lucaslehnen/tchecode.kvm_qemu
+documentation: https://github.com/lucaslehnen/tchecode.kvm_qemu
+homepage: https://github.com/lucaslehnen/tchecode.kvm_qemu
+issues: https://github.com/lucaslehnen/tchecode.kvm_qemu/issues
 build_ignore: []

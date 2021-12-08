@@ -1,0 +1,13 @@
+- name: "Destroy default pool :: {{ pool }}"
+  command:
+    cmd: "virsh pool-destroy {{ pool }}"
+  failed_when: false
+  register: pool_destroy
+  changed_when: pool_destroy.rc == 0
+
+- name: "Remove default settings :: {{ pool }}"
+  command:
+    cmd: "virsh pool-undefine {{ pool }}"
+  failed_when: false
+  register: pool_undefine
+  changed_when: pool_undefine.rc == 0

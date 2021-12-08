@@ -1,11 +1,11 @@
 ---
 - name: "Find backup interface files to undo the bridge network"
   find:
-    recurse: no
+    recurse: false
     paths:
-    - "{{ '/etc/network/interfaces' | dirname }}"
+      - "{{ '/etc/network/interfaces' | dirname }}"
     patterns:
-    - '{{ "/etc/network/interfaces" | basename }}\..*~'
+      - '{{ "/etc/network/interfaces" | basename }}\..*~'
     use_regex: true
   register: find_backup
 
@@ -16,7 +16,7 @@
 
 - name: Show it
   debug:
-    var: latest_backup    
+    var: latest_backup
   when: find_backup.files|length > 0
 
 - name: Restoring the last backup
@@ -24,6 +24,7 @@
     src: "{{ latest_backup }}"
     remote_src: true
     dest: "/etc/network/interfaces"
+    mode: 0644
   notify: reboot
   when: find_backup.files|length > 0
 

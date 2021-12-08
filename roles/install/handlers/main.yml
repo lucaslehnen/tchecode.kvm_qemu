@@ -1,6 +1,11 @@
 ---
-# handlers file for install
 - name: Reboot
-  reboot: 
+  reboot:
     msg: "Reboot initiated by Ansible"
   listen: "reboot"
+
+- name: "Restart service"
+  systemd:
+    name: "libvirtd"
+    state: "restarted"
+  listen: "restart_libvirt"

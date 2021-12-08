@@ -1,0 +1,29 @@
+- name: "Check network adapter state :: {{ item.name }}"
+  command:
+    cmd: "virsh net-list --all"
+  register: net_check
+  changed_when: net_check.stdout.find(item.name) < 0
+
+- name: "Copying template XML"
+  template:
+    src: "libvirt_network_{{ item.mode }}.xml.j2"
+    dest: "/usr/share/libvirt/networks/{{ item.name }}.xml"
+    mode: 0640
+  register: net_template
+
+- name: "Updating network definition :: {{ item.name }}"
+  when: net_check.stdout.find(item.name) < 0 or net_template.changed
+  block:
+    - name: "Delete old config"
+      include_tasks: remove_network.yml
+      vars:
+        network_to_remove: "{{ item.name }}"
+
+    - name: "Defining network"
+      command: "virsh net-define /usr/share/libvirt/networks/{{ item.name }}.xml"
+
+    - name: "Autostart network"
+      command: "virsh net-autostart {{ item.name }}"
+
+    - name: "start network"
+      command: "virsh net-start {{ item.name }}"

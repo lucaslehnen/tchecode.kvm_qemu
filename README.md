@@ -1,6 +1,6 @@
-# Ansible Collection - tchecode.libvirt
+# Ansible Collection - tchecode.kvm_qemu
 
-[![wakatime](https://wakatime.com/badge/github/lucaslehnen/tchecode.libvirt.svg)](https://wakatime.com/badge/github/lucaslehnen/tchecode.libvirt)
+[![wakatime](https://wakatime.com/badge/github/lucaslehnen/tchecode.kvm_qemu.svg)](https://wakatime.com/badge/github/lucaslehnen/tchecode.kvm_qemu)
 
 It's an Ansible collection with roles to install libvirt and Qemu.
 
@@ -8,8 +8,10 @@ It's an Ansible collection with roles to install libvirt and Qemu.
 
 ## Roles available
 
-- `tchecode.libvirt.install`: Install libvirt and Qemu, configure a default pool and bridge network.
-- `tchecode.k3s.reset`: Reset all changes made by this collection
+- `tchecode.kvm_qemu.install`: Install libvirt and Qemu
+- `tchecode.kvm_qemu.network`: Configure a virtual network
+- `tchecode.kvm_qemu.pool`: Create a storage pool
+- `tchecode.kvm_qemu.reset`: Reset all changes made by this collection
 
 More info about these roles can be found in `roles/{role}` folder.
 
@@ -28,7 +30,7 @@ Create your playbook `site.yml`:
   become: true
   gather_facts: false
   roles:
-    - tchecode.libvirt.install
+    - tchecode.kvm_qemu.install
 ```
 
 Run the playbook:

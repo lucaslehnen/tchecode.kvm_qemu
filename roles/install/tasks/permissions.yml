@@ -1,0 +1,13 @@
+---
+- name: "Adding user {{ ansible_ssh_user }} to libvirt group"
+  user:
+    name: "{{ ansible_ssh_user }}"
+    groups: "libvirt"
+    append: true
+
+- name: "Configure libvirt security storage"
+  replace:
+    path: "/etc/libvirt/qemu.conf"
+    regexp: '^#?security_driver = "(.*)"$'
+    replace: 'security_driver = "none"'
+  notify: restart_libvirt

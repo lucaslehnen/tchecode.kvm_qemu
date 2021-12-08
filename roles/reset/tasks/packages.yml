@@ -1,6 +1,6 @@
 - name: "Uninstall libvirt packages"
   apt:
-    pkg: 
+    pkg:
       - libvirt-daemon
       - qemu-kvm
       - bridge-utils
@@ -9,7 +9,7 @@
       - libguestfs-tools
       - libosinfo-bin
       - qemu-system
-      - virt-manager 
+      - virt-manager
     state: absent
     purge: true
     autoclean: true
@@ -23,6 +23,6 @@
 
 - name: "Disable kvm_intel kernel module"
   file:
-    path: /etc/modprobe.d/qemu-system-x86.conf    
-    state: absent    
+    path: /etc/modprobe.d/qemu-system-x86.conf
+    state: absent
   notify: reboot

@@ -1,0 +1,42 @@
+- name: "Check storage pool state :: {{ item.name }}"
+  command:
+    cmd: "virsh pool-list --all"
+  register: pool_check
+  changed_when: pool_check.stdout.find(item.name) < 0
+
+- name: "Copying template XML"
+  template:
+    src: "libvirt_pool_{{ item.type }}.xml.j2"
+    dest: "/usr/share/libvirt/pools/{{ item.name }}.xml"
+    mode: 0640
+  register: pool_template
+
+- name: "Defining pool :: {{ item.name }}"
+  when: pool_check.stdout.find(item.name) < 0 or pool_template.changed
+  block:
+    - name: "Removing old configuration"
+      include_tasks: remove_pool.yml
+      vars:
+        pool: "{{ item.name }}"
+
+    - name: "Creating directory"
+      file:
+        path: /usr/share/libvirt/pools/
+        state: directory
+        mode: 0644
+
+    - name: "Defining pool"
+      command: "virsh pool-define /usr/share/libvirt/pools/{{ item.name }}.xml"
+
+    - name: "Autostart pool"
+      command: "virsh pool-autostart {{ item.name }}"
+
+    - name: "Creating pool directory"
+      file:
+        path: "{{ item.path  }}"
+        state: directory
+        mode: 0640
+      when: item.type == "dir"
+
+    - name: "start pool"
+      command: "virsh pool-start {{ item.name }}"

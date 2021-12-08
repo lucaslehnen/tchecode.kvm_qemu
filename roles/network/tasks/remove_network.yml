@@ -1,0 +1,14 @@
+- name: "Destroy network :: {{ network_to_remove }}"
+  command:
+    cmd: "virsh net-destroy {{ network_to_remove }}"
+  failed_when: false
+  register: net_destroy
+  changed_when: net_destroy.rc == 0
+
+- name: "Remove network settings :: {{ network_to_remove }}"
+  command:
+    cmd: "virsh net-undefine {{ network_to_remove }}"
+  register: net_undefine
+  changed_when: net_undefine.rc == 0
+  failed_when: false
+

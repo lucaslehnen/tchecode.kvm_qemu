@@ -1,12 +1,12 @@
 Install role
 -------------------------------------------------------------------
 
-This role install libvirt and Qemu, configure a bridge network on your system and enable the default storage pool in `/var/lib/libvirt/images`.
+This role install libvirt and Qemu and default configurations.
 
-Configure the variables
+No variables are needed
+
+Example
 -----------------------
-
-`bridge_network`: The name of the virtual network device that will be created.
 
 ```yaml
 - hosts: all
@@ -14,7 +14,6 @@ Configure the variables
   become: true
   gather_facts: false
   roles:
-    - tchecode.libvirt.install
-  vars:
-    - bridge_network: "br0"
+    - tchecode.kvm_qemu.install
+
 ```

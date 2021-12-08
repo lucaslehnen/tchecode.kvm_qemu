@@ -10,8 +10,8 @@ iface {{ physical_interface }} inet manual
 # bridged Network interface
 # https://wiki.debian.org/BridgeNetworkConnections
 
-auto {{ bridge_network }}
-iface {{ bridge_network }} inet static
+auto {{ kvm_qemu.bridge_network }}
+iface {{ kvm_qemu.bridge_network }} inet static
     bridge_ports {{ physical_interface }}
     bridge_stp off
     address {{ ansible_default_ipv4.address }}

@@ -1,0 +1,16 @@
+---
+- include_tasks: remove_pool.yml
+  vars:
+    pool: 'default'
+
+- name: "Install cifs utils"
+  apt:
+    pkg:
+      - cifs-utils
+    update_cache: true
+    state: present
+  when: lookup('ansible.utils.index_of', kvm_qemu.pools, 'eq', 'cifs', 'format')
+
+- name: "Creating the storage pools"
+  include_tasks: config.yml
+  with_items: "{{ kvm_qemu.pools }}"
