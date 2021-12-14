@@ -31,18 +31,25 @@
         state: directory
         mode: 0644
 
+    - name: "Creating pool directory"
+      file:
+        path: "{{ item.mount_path }}"
+        state: directory
+        mode: 0640
+      when: item.type == "netfs"
+
+    - name: "Creating pool directory"
+      file:
+        path: "{{ item.path }}"
+        state: directory
+        mode: 0640
+      when: item.type != "netfs"
+
     - name: "Defining pool"
       command: "virsh pool-define /usr/share/libvirt/pools/{{ item.name }}.xml"
 
     - name: "Autostart pool"
       command: "virsh pool-autostart {{ item.name }}"
-
-    - name: "Creating pool directory"
-      file:
-        path: "{{ item.path  }}"
-        state: directory
-        mode: 0640
-      when: item.type == "dir"
 
     - name: "start pool"
       command: "virsh pool-start {{ item.name }}"
