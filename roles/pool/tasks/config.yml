@@ -4,6 +4,12 @@
   register: pool_check
   changed_when: pool_check.stdout.find(item.name) < 0
 
+- name: "Create directory"
+  file:
+    path: "/usr/share/libvirt/pools/"
+    mode: 0640
+    state: "directory"
+
 - name: "Copying template XML"
   template:
     src: "libvirt_pool_{{ item.type }}.xml.j2"
