@@ -42,7 +42,8 @@
       file:
         path: "{{ item.path }}"
         state: directory
-        mode: 0640
+        mode: 0711
+        owner: "{{ ansible_ssh_user }}"
       when: item.type != "netfs"
 
     - name: "Defining pool"

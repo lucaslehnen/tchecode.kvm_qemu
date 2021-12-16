@@ -1,5 +1,6 @@
 ---
 - name: "Adding user {{ ansible_ssh_user }} to libvirt group"
+  # Enable remote access to qemu
   user:
     name: "{{ ansible_ssh_user }}"
     groups: "libvirt"
